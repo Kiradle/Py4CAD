@@ -54,42 +54,49 @@ EntiryGroupList = []
         # c_list = []
         # d_list = []
 
+def analyseBlock(dwg):
+    # iterate over all existing block definitions
+    for block in dwg.blocks:
+        for e in block:
+            if e.dxftype() == 'LINE':    # block 中包含"LINE"
+                print("DXF LINE FOUND:", block.name,  end=" ")
+                start_in_block = e.dxf.start
+                end_in_block = e.dxf.end
+                print(start_in_block, "__", end_in_block)
 
+def EntityBlock(modelspace, dwg):
+    # iterate over all existing entity
+    for insert in modelspace.query('INSERT'):
+        block = dwg.blocks[insert.dxf.name]
+        for e in block:
+            if e.dxftype() == 'LINE':    # block 中包含"LINE"
+                print("DXF LINE FOUND:", block.name,  end=" ")
+                start_in_block = (e.dxf.start[0], e.dxf.start[1])
+                end_in_block = (e.dxf.end[0], e.dxf.end[1])
+                print(start_in_block, "__", end_in_block)
 
-        # try:
-        #     for e in eInsert:
-        #         print(e.dxftype)
-        # except Exception as e:
-        #     print(eInsert.name+" has no e")
-
+def EntityPoint(modelspace):
+    for insert in modelspace.query('INSERT'):
+        try:
+            print(insert.dxf.name)
+            print(insert.dxf.insert)
+            point_in_model = insert.dxf.insert
+        except Exception as e:
+            print('error : analyseEntity')
 
 
 if __name__ == '__main__':
 
     # dwg = ezdxf.readfile("test1_2010.dxf")
-    dwg = ezdxf.readfile("新块.dxf")
-    print(dwg.encoding)
+    dwg = ezdxf.readfile("test2.dxf")
 
-    msp = dwg.modelspace()
+    modelspace = dwg.modelspace()
 
-    eb = dwg.entities.query('*')
-    i = 0
-    for e in eb:
-        try:
-            print(e.get_dxf_attrib('name'))
-        except Exception as sss:
-            pass
-        i += 1
-    # j = 0
-    # for e in msp:
-    #     try:
-    #         print(e.get_dxf_attrib(''))
-    #         j += 1
-    #     except Exception as ex:
-    #         print("%d is error" %j)
+    # analyseBlock(dwg)
+
+    EntityBlock(modelspace, dwg)
+
+    # analyseEntity(modelspace)
 
 
-    print(i)
 
-        # if e.dxftype() == 'INSERT':
-        #     print(e.dxfattribs())
