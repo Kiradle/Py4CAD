@@ -39,7 +39,7 @@ import ezdxf
 sys.path.insert(0, os.path.abspath('..'))
 
 # 创建实例分组列表
-EntiriesGroupList = []
+EntiryGroupList = []
 
 
 # def get_entity(filename):
@@ -66,14 +66,30 @@ EntiriesGroupList = []
 
 if __name__ == '__main__':
 
-    # get_entity("test1_shilituxing_weibiaoji.dxf")
-    # get_entity("test1_shilituxing.dxf")
-    dwg = ezdxf.readfile("test1_shilituxing.dxf")
+    # dwg = ezdxf.readfile("test1_2010.dxf")
+    dwg = ezdxf.readfile("新块.dxf")
     print(dwg.encoding)
 
     msp = dwg.modelspace()
-    for e in msp:
-        print(e.get_dxf_attrib('name'))
+
+    eb = dwg.entities.query('*')
+    i = 0
+    for e in eb:
+        try:
+            print(e.get_dxf_attrib('name'))
+        except Exception as sss:
+            pass
+        i += 1
+    # j = 0
+    # for e in msp:
+    #     try:
+    #         print(e.get_dxf_attrib(''))
+    #         j += 1
+    #     except Exception as ex:
+    #         print("%d is error" %j)
+
+
+    print(i)
 
         # if e.dxftype() == 'INSERT':
-            # print(e.dxfattribs())
+        #     print(e.dxfattribs())
