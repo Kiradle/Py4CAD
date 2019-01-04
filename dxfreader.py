@@ -95,6 +95,11 @@ if __name__ == '__main__':
     # analyseBlock(dwg)
 
     EntityBlock(modelspace, dwg)
+    # EntityPoint(modelspace)
+    block = dwg.blocks.get('u1')
+    block.add_line((-1, 5), (1, 5))
+
+    dwg.saveas('bykiradle.dxf')
 
     # analyseEntity(modelspace)
 
