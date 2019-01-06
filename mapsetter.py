@@ -14,10 +14,18 @@ class XBlock(object):
         self.b_start = insert
         self.b_end = ""
 
-    def set_insert(self, insert, rotation):
+    # 获取insert基点
+    def get_insert_info(self, insert):
         pass
 
-    def get_info(self, name):
+    # 分组block
+    def set_group(self, group_list):
+        pass
+
+    # 计算insert中LINE在modelspace的起止点
+    def cal_coordinate(self, insert):
+        pass
+# 利用观察者模式中的通知来操作所有类的实例。
 
 
 class XInsert(XBlock):
