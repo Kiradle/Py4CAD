@@ -45,21 +45,25 @@ class Read(object):
         self.Entities.append(entity)
 
 
-    # 分组block
-    def set_group(self, group_list):
-        pass
-
-
 # 计算insert中LINE在modelspace的终点
-def cal_end(bend, rotation, start):
-    x, y = bend
+def cal_end(b_end, rotation, start):
+    x, y = b_end
     ro = math.radians(rotation)
     sin = math.sin(ro)
     cos = math.cos(ro)
     x_e = x * cos - y * sin + start[0]
     y_e = x * sin + y * cos + start[1]
-
     return (x_e, y_e)
+
+def cal_crossover_point(aa ,bb):
+
+
+# def getCoordinate(x1, y1, x2, y2, x3, y3, x4, y4):
+
+    px = ((x1*y2-y1*x2)*(x3-x4)-(x1-x2)*(x3*y4-y3*x4)) / ((x1-x2)*(y3-y4)-(y1-y2)*(x3-x4))
+    py = ((x1*y2-y1*x2)*(y3-y4)-(y1-y2)*(x3*y4-y3*x4)) / ((x1-x2)*(y3-y4)-(y1-y2)*(x3-x4))
+    return [px, py]
+
 
 # 利用观察者模式中的通知来操作所有类的实例？
 
